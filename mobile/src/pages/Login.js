@@ -3,7 +3,10 @@ import logo from '../../assets/logo.png'
 import { View, KeyboardAvoidingView, Platform,StyleSheet, Image, TextInput, TouchableOpacity, Text} from 'react-native'
 
 
-function Login() {
+function Login({ navigation }) {
+  function handleLogin() {
+    navigation.navigate('Main')
+  }
   return (
     <KeyboardAvoidingView 
     style={styles.container}
@@ -18,7 +21,9 @@ function Login() {
         placeholderTextColor="#999"
         style={styles.input}
         />
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity 
+        style={styles.button}
+        onPress={handleLogin}>
           <Text style={styles.textButton}>Enviar</Text>
         </TouchableOpacity>
     </KeyboardAvoidingView>
