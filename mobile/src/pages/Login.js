@@ -1,19 +1,28 @@
 import React, { useState } from 'react'
 import logo from '../../assets/logo.png'
-import AsyncStorage from '@react-native-community/async-storage'
-import { View, KeyboardAvoidingView, Platform,StyleSheet, Image, TextInput, TouchableOpacity, Text} from 'react-native'
+// import AsyncStorage from '@react-native-community/async-storage'
+import { 
+  View, 
+  KeyboardAvoidingView, 
+  Platform,StyleSheet,
+  Image,
+  TextInput,
+  TouchableOpacity, 
+  Text, 
+  AsyncStorage
+} from 'react-native'
+
 import api from '../services/api'
 
 function Login({ navigation }) {
   const [user, setUser] = useState('')
 
   async function handleLogin() {
-    console.log('reps ==>', user)
     const response = await api.post('/devs', {username: user})  
-    const {_id} = response.data
-    
+    const {_id} = response.data    
     navigation.navigate('Main', { _id })
   }
+
   return (
     <KeyboardAvoidingView 
     style={styles.container}
