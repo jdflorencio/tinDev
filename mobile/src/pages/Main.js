@@ -11,7 +11,6 @@ import {
 import api from '../services/api'
 import logo from '../../assets/logo.png'
 
-
 function Main({ navigation }) {
 	const id = navigation.getParam('user')
 	const [users, setUsers] = useState([])
@@ -29,17 +28,19 @@ function Main({ navigation }) {
 	}, [id])
 
 	async function handleLike() {
-		await api.post.apply(`/devs/${id}/likes`, null, {
+		const [user, ...rest] = users
+		await api.post(`/devs/${user._id}/likes`, null, {
 			headers: { user: id },
 		})
-		setUsers(users.filter(user => user._id != id))
+		setUsers(rest)
 	}
 
 	async function handleDisLike() {
-		await api.post.apply(`/devs/${id}/dislikes`, null, {
-			headers: { user: matchMedia.params.id },
+		const [user, ...rest] = users
+		await api.post(`/devs/${user._id}/dislikes`, null, {
+			headers: {user: id},
 		})
-		setUsers(users.filter(user => user._id != id))
+		setUsers(rest)
 	}
 
 	async function handleLogout() {
@@ -47,12 +48,14 @@ function Main({ navigation }) {
 		navigation.navigate('Login')
 	}
 
-	return (<SafeAreaView style={styles.container}>
+	return (
+		<SafeAreaView style={styles.container}>
 		<TouchableOpacity onPress={handleLogout}>
-		 <Image style={styles.logo } source={logo} />
+			<Image style={styles.logo } source={logo} />
 		</TouchableOpacity>
 		
 		<View style={styles.cardContainer}>
+
 			{ users.length === 0? <Text style={styles.empty}>Nada aqui :(</Text> : (
 				users.map((user, index) => (
 					<View key={user._id} style={[styles.card, {zIndex: users.length - index}]}>
@@ -64,21 +67,7 @@ function Main({ navigation }) {
 					</View>
 				))
 			)}
-	
-			<View style={[styles.card, {zIndex: 2}]}>
-				<Image style={styles.avatar} source={{ uri: "https://avatars1.githubusercontent.com/u/1665576?v=4" }} />
-				<View style={styles.footer} >
-					<Text style={styles.name}>Celso neto</Text>
-					<Text style={styles.bio} numberOfLines={3}>desenvolvedor full stack</Text>
-				</View>
-			</View>
-			<View style={[styles.card, {zIndex: 1}]}>
-				<Image style={styles.avatar} source={{ uri: "https://avatars1.githubusercontent.com/u/1665576?v=4" }} />
-				<View style={styles.footer} >
-					<Text style={styles.name}>Celso neto</Text>
-					<Text style={styles.bio} numberOfLines={3}>desenvolvedor full stack</Text>
-				</View>
-			</View>
+
 		</View>
 		<View style={styles.buttonsContainer}>
 
