@@ -69,20 +69,18 @@ function Main({ navigation }) {
 			)}
 
 		</View>
+		{users.length > 0 && (	
 		<View style={styles.buttonsContainer}>
+			
+					<TouchableOpacity style={styles.button} onPress={handleLike}>
+						<Text>Like</Text>
+					</TouchableOpacity>
 
-			<TouchableOpacity 
-			style={styles.button}
-			onPress={handleLike}
-			>
-				<Text>Like</Text>
-			</TouchableOpacity>
-			<TouchableOpacity style={styles.button} onPress={handleDisLike}>
+					<TouchableOpacity style={styles.button}	onPress={handleDisLike}>
+							<Text>DisLike</Text>
+					</TouchableOpacity>
 
-				<Text>DisLike</Text>
-			</TouchableOpacity>
-
-		</View>
+		</View>)}
 		</SafeAreaView>)
 }
 
