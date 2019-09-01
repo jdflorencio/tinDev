@@ -24,6 +24,12 @@ function Main({ match }) {
 	useEffect(() => {
 		const socket = io('http://127.0.0.1:3333')
 
+		setTimeout(() => {
+			socket.emit('hello', {
+				message: 'hello world'
+			})
+		}, 3000);
+
 	}, [match.params.id])
 
 	async function handleLike(id) {
