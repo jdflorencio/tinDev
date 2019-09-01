@@ -1,4 +1,5 @@
 import React, { useEffect, useState }from 'react'
+import io from 'socket.io-client'
 import { Link } from 'react-router-dom'
 import api from '../services/api'
 import './Main.css'
@@ -18,6 +19,11 @@ function Main({ match }) {
 	}
 
 	loadUsers()
+	}, [match.params.id])
+
+	useEffect(() => {
+		const socket = io('http://127.0.0.1:3333')
+
 	}, [match.params.id])
 
 	async function handleLike(id) {
