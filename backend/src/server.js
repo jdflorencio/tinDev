@@ -6,12 +6,13 @@ const routes = require('./routes')
 const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
+require('dotenv').config()
 
 io.on('connection', server => {
     console.log('nova conexão', socket.id)
 })
 
-mongoose.connect('mongodb+srv://<user>:<password>!@cluster0-fnus2.mongodb.net/test?retryWrites=true&w=majority', 
+mongoose.connect(process.env.DB_HOST, 
 {
     useNewUrlParser: true
 })
