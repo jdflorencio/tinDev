@@ -11,7 +11,7 @@ io.on('connection', server => {
     console.log('nova conexão', socket.id)
 })
 
-mongoose.connect('mongodb+srv://florencio:enya2orea!@cluster0-fnus2.mongodb.net/test?retryWrites=true&w=majority', 
+mongoose.connect('mongodb+srv://<user>:<password>!@cluster0-fnus2.mongodb.net/test?retryWrites=true&w=majority', 
 {
     useNewUrlParser: true
 })
